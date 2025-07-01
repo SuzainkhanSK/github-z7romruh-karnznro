@@ -112,24 +112,26 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </AnimatePresence>
 
       {/* Desktop sidebar - hidden on mobile */}
-      <motion.div 
-        className="hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col lg:z-40"
-        animate={{ width: isDesktopSidebarCollapsed ? 80 : 280 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        style={{ willChange: 'width' }}
-      >
-        <div className="flex-1 bg-gradient-to-b from-indigo-900 to-purple-900 border-r border-white/10 shadow-xl">
-          <SidebarContent 
-            navigation={navigation}
-            userProfile={userProfile}
-            onSignOut={handleSignOut}
-            currentPath={location.pathname}
-            isCollapsed={isDesktopSidebarCollapsed}
-            onToggleCollapse={toggleDesktopSidebar}
-            isMobile={false}
-          />
-        </div>
-      </motion.div>
+      <div className="hidden lg:block">
+        <motion.div 
+          className="fixed inset-y-0 flex flex-col z-40"
+          animate={{ width: isDesktopSidebarCollapsed ? 80 : 280 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          style={{ willChange: 'width' }}
+        >
+          <div className="flex-1 bg-gradient-to-b from-indigo-900 to-purple-900 border-r border-white/10 shadow-xl">
+            <SidebarContent 
+              navigation={navigation}
+              userProfile={userProfile}
+              onSignOut={handleSignOut}
+              currentPath={location.pathname}
+              isCollapsed={isDesktopSidebarCollapsed}
+              onToggleCollapse={toggleDesktopSidebar}
+              isMobile={false}
+            />
+          </div>
+        </motion.div>
+      </div>
 
       {/* Main content */}
       <motion.div 
